@@ -20,3 +20,12 @@ We engineered a production-ready "Walking Skeleton" using the modern Java ecosys
 3.  **Data Access Layer (Spring Data JPA):** We paired JPQL queries with the `@Lock(LockModeType.PESSIMISTIC_WRITE)` annotation to safely bind parameters (preventing SQL injection) and instruct Hibernate to issue the locking SQL queries.
 4.  **Business Logic (Spring Boot Service):** We wrapped the transfer logic in a strict `@Transactional` boundary. The service orders the locks, mathematically adjusts the `BigDecimal` balances, and inserts an immutable audit record into a `transaction_history` table within a single transaction.
 5.  **Load Testing (Postman):** We used Postman's Collection Runner to simulate high-concurrency stress testing, successfully firing off virtual users simultaneously transferring funds back and forth to prove the lock ordering prevents database exceptions under load.
+
+## **DeadLock Testing By 50 concurrent transactions:**
+
+<img width="1068" height="472" alt="image" src="https://github.com/user-attachments/assets/4a7788c4-9626-4d9e-987d-f771a3214d40" />
+
+## **Performance Testing**
+
+<img width="1085" height="920" alt="image" src="https://github.com/user-attachments/assets/e925807d-1145-4eb3-afeb-75715de72bd3" />
+
